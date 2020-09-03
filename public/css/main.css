@@ -90,3 +90,15 @@ li.page-item.active {
     font-size: 0.9em;
     margin-left: 6%;
 }
+
+footer{
+    text-align: center;
+    font-size:1.4em;
+    margin-top:1%;
+}
+
+footer a {
+    text-decoration: none;
+    color:#32c5fb;
+    font-weight: bold;
+}

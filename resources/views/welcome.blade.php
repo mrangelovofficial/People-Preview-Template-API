@@ -3,7 +3,7 @@
 @section('main')
 <div class="company-list-container">
     @if($collection)
-    <div class="result">Showing {{$results}} results</div>
+    <div class="result">{{$results}} results</div>
     <ul class="company-list">
         @foreach($collection as $row)
         <li class="company-list-row">
@@ -12,14 +12,13 @@
             </div>
             <div class="company-list-info">
                 <span class="company-list-name">{{$row['name']}}</span>
-                <span class="company-list-title">{{$row['title']}} at {{$row['company']}}</span>
-                <span class="company-list-bio">{{$row['bio'] }}</span>
+                <span class="company-list-title">{{$row['address']}}</span>
             </div>
 
         </li>
         @endforeach
     </ul>
-    <div>{{ $collection->links() }}</div>
+    <div>{{ $collection->withQueryString()->links() }}</div>
     @else
     <script>
         location.reload();

@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\Users\GetUsersService;
+use App\Http\Requests\ValidateUserPageRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index(ValidateUserPageRequest $request)
     {
-        //Get list
-        $service = GetUsersService::fetchUsers();
 
-        //Handle the pagination
-        if(!is_null($service)){
-            $countAll = count($service);
+        //Get list | Default value of fetchUsers is 1000
+        $Users = GetUsersService::fetchUsers(1500);
+
+        //Pagination
+        if(!is_null($Users)){
+            $countAll = count($Users);
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            $Collection = collect($service);
-            $perPage = 5;
+            $Collection = collect($Users);
+            $perPage = $request->perPage ?? 5;
             $currentPageCollection = $Collection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
             $paginatedCollection = new LengthAwarePaginator($currentPageCollection , count($Collection), $perPage);
             $paginatedCollection->setPath($request->url());

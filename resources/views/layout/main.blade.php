@@ -16,6 +16,8 @@
     }
     </script>
     @yield('main')
+
+    <footer>Build by <a href="https://mrangelov.ga">Mr.Angelov</a></footer>
 </body>
 </html>
 
